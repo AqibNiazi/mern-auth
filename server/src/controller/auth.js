@@ -2,6 +2,8 @@ const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const transporter = require("../config/nodemailer");
+
+
 const register = async (req, res) => {
   const { name, email, password } = req.body;
   console.log("Request body", req.body);
@@ -89,8 +91,44 @@ const logout = (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// send verification OTP to the users email
+const sendVerifyOTP = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    if (user.isAccountVerified) {
+      return res.json({ success: false, message: "Account already verified" });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.verifyOtp = otp;
+    user.verifyOtpExpireAt = Date.now() + 3600000; // 1 hour from now
+
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "Account Verification OTP",
+      text: `Your OTP for verification is: ${otp}. Verify your account within 1 hour.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    await user.save();
+
+    return res.json({ success: true, message: "OTP sent successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
+  sendVerifyOTP,
 };
