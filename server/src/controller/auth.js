@@ -1,7 +1,7 @@
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const transporter = require("../config/nodemailer");
 const register = async (req, res) => {
   const { name, email, password } = req.body;
   console.log("Request body", req.body);
@@ -26,6 +26,16 @@ const register = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
       maxAge: 3600000,
     });
+
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: "Welcome to Our Platform",
+      text: `Welcome to Mern Authentication Application. Your account has been created with email id: ${email}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
     return res.json({ success: true, message: "User created successfully" });
   } catch (error) {
     res.json({ success: false, message: error.message });

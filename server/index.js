@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 // const bodyParser = require("body-parser");
-const database = require("./src/database");
+const database = require("./src/config/mongodb");
 const cors = require("cors");
 const HOST = process.env.HOST;
 const app = express();
