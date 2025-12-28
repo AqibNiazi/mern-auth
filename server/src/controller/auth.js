@@ -1,8 +1,10 @@
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 const register = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log("Request body", req.body);
 
   if (!name || !email || !password) {
     return res.json({ success: false, message: "All fields are required" });
@@ -64,7 +66,21 @@ const login = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-module.export = {
+
+const logout = (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
+    });
+    res.json({ success: true, message: "Logged out successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+module.exports = {
   register,
   login,
+  logout,
 };

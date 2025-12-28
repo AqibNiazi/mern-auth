@@ -1,18 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const database = require("./src/database");
 const cors = require("cors");
 const HOST = process.env.HOST;
 const app = express();
 const PORT = process.env.PORT || 3000;
-// const {
-//   createUser,
-//   updateUser,
-//   getUsers,
-//   deleteUser,
-//   getUserBySlug,
-// } = require("./src/requests/userRequests");
+const authRouter = require("./src/Router/authRouter");
 
 // Middlewares
 app.use(
@@ -21,17 +15,11 @@ app.use(
     credentials: true,
   })
 );
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Routes
-// app.get("/users", getUsers);
-// app.get("/user/:slug", getUserBySlug);
-// app.post("/create-user", createUser);
-// app.put("/update-user/:id", updateUser);
-// app.delete("/delete-user/:id", deleteUser);
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// API Endpoints
+app.use("/api/auth", authRouter);
+
 
 const NodeJsServer = async () => {
   try {
