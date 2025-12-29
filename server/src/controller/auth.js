@@ -94,6 +94,11 @@ const logout = (req, res) => {
 
 // send verification OTP to the users email
 const sendVerifyOTP = async (req, res) => {
+  // we will get this userId from the token
+  // This token is stored in the cookies
+  // we need a middleware to get  cookies
+  // From the cookie we will get  the token
+  // we will get userId from the token
   try {
     const { userId } = req.body;
     const user = await User.findById(userId);
@@ -126,9 +131,42 @@ const sendVerifyOTP = async (req, res) => {
   }
 };
 
+const verifyEmail = async (req, res) => {
+  const { userId, otp } = req.body;
+  if (!userId || !otp) {
+    return res.json({
+      success: false,
+      message: "User ID and OTP are required",
+    });
+  }
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    if (user.verifyOtp === "" || user.verifyOtp !== otp) {
+      return res.json({ success: false, message: "Invalid OTP" });
+    }
+    if (user.verifyOtpExpireAt < Date.now()) {
+      return res.json({ success: false, message: "OTP expired" });
+    }
+    user.isAccountVerified = true;
+    user.verifyOtp = "";
+    user.verifyOtpExpireAt = 0;
+    await user.save();
+    return res.json({
+      success: true,
+      message: "Email verified successfully",
+    });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
   sendVerifyOTP,
+  verifyEmail,
 };
