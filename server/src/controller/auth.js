@@ -130,7 +130,7 @@ const sendVerifyOTP = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
+// This function will verify the OTP sent to the user's email
 const verifyEmail = async (req, res) => {
   const { userId, otp } = req.body;
   if (!userId || !otp) {
