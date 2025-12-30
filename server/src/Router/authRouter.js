@@ -8,7 +8,7 @@ const {
   isAuthenticated,
   sendResetOtp,
   resetPassword,
-} = require("../controller/auth.js");
+} = require("../controller/authController.js");
 const userAuth = require("../middleware/userAuth.js");
 const authRouter = express.Router();
 

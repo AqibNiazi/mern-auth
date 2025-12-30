@@ -7,6 +7,7 @@ const HOST = process.env.HOST;
 const app = express();
 const PORT = process.env.PORT || 3000;
 const authRouter = require("./src/Router/authRouter");
+const userRouter = require("./src/Router/userRoutes");
 
 // Middlewares
 app.use(
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // API Endpoints
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 
 const NodeJsServer = async () => {
