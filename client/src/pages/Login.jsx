@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState("Sign up");
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
       <img
+        onClick={() => navigate("/")}
         src={assets.logo}
-        alt=""
+        alt="App Logo"
         className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
       />
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
@@ -22,9 +35,12 @@ const Login = () => {
         <form>
           {state === "Sign up" && (
             <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-              <img src={assets.person_icon} alt="" />
+              <img src={assets.person_icon} alt="Person icon" />
               <input
                 type="text"
+                name="name"
+                value={user.name}
+                onChange={handleChange}
                 placeholder="Enter your name"
                 className="bg-transparent outline-none"
                 required
@@ -33,9 +49,12 @@ const Login = () => {
           )}
 
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-            <img src={assets.mail_icon} alt="" />
+            <img src={assets.mail_icon} alt="Mail Icon" />
             <input
               type="email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
               placeholder="Enter your email"
               className="bg-transparent outline-none"
               required
@@ -43,16 +62,22 @@ const Login = () => {
           </div>
 
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-            <img src={assets.lock_icon} alt="" />
+            <img src={assets.lock_icon} alt="Lock Icon" />
             <input
               type="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
               placeholder="Enter your password"
               className="bg-transparent outline-none"
               required
             />
           </div>
 
-          <p className="mb-4 text-indigo-500 cursor-pointer">
+          <p
+            className="mb-4 text-indigo-500 cursor-pointer"
+            onClick={() => navigate("/reset-password")}
+          >
             Forgot Password?
           </p>
           <button className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium cursor-pointer">
