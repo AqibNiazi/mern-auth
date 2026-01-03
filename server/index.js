@@ -9,10 +9,11 @@ const PORT = process.env.PORT || 3000;
 const authRouter = require("./src/Router/authRouter");
 const userRouter = require("./src/Router/userRoutes");
 
+const allowedOrigins = ["http://localhost:5173"];
 // Middlewares
 app.use(
   cors({
-    origin: "*",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
