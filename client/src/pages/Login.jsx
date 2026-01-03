@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+
 const Login = () => {
   const navigate = useNavigate();
   const [state, setState] = useState("Sign up");
@@ -13,6 +15,10 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -32,7 +38,7 @@ const Login = () => {
             ? "Create your account"
             : "Login to your account!"}
         </p>
-        <form>
+        <form onSubmit={handleSubmit}>
           {state === "Sign up" && (
             <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
               <img src={assets.person_icon} alt="Person icon" />
