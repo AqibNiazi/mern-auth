@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const authRouter = require("./src/Router/authRouter");
 const userRouter = require("./src/Router/userRoutes");
-
+const cookieParser = require("cookie-parser");
 const allowedOrigins = ["http://localhost:5173"];
 // Middlewares
 app.use(
@@ -18,6 +18,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser()); 
 
 // API Endpoints
 app.use("/api/auth", authRouter);

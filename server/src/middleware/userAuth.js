@@ -6,26 +6,28 @@ const jwt = require("jsonwebtoken");
 // Then it will verify the token
 // If the token is valid, it will get the userId from the token
 // Then it will pass the userId to the controller function
+
 const userAuth = (req, res, next) => {
-  const { token } = req.cookies;
+  const { token } = req.cookies || {};
 
   if (!token) {
     return res.json({ success: false, message: "Unauthorized - Login again" });
   }
-  try {
-    const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (tokenDecode.id) {
-      req.userId = tokenDecode.id;
-    } else {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decoded.userId) {
       return res.json({
         success: false,
         message: "Unauthorized - Login again",
       });
     }
-    next(); // This will execute our controller function
+
+    req.userId = decoded.userId; // ✅ attach to request
+    next(); // This will pass the control to the controller function
   } catch (error) {
-    res.json({ success: false, message: error.message });
+    return res.json({ success: false, message: "Invalid token" });
   }
 };
 
