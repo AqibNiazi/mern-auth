@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { clientBaseURL, clientEndPoints } from "../config";
 import { toast } from "react-toastify";
 
@@ -20,15 +20,27 @@ export const AppContextProvider = (props) => {
 
   const getAuthState = async () => {
     try {
-      const { data } = await clientBaseURL.get(clientEndPoints.isAuthenticated);
-      if (data.success) {
+      const response = await clientBaseURL.post(
+        clientEndPoints.isAuthenticated
+      );
+      console.log("response", response);
+
+      if (response.data.success) {
         setIsLoggedIn(true);
         getUserData();
+      } else {
+        setIsLoggedIn(false);
+        setUserData(null);
       }
     } catch (error) {
       toast.error(error.message);
     }
   };
+
+  // ✅ Call getAuthState once when the provider mounts
+  useEffect(() => {
+    getAuthState();
+  }, []);
 
   const value = {
     isLoggedIn,

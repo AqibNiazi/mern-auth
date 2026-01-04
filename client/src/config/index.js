@@ -1,6 +1,6 @@
 import axios from "axios";
 //  Local
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 const websiteBaseURL = "http://localhost:3000";
 
 // Production
@@ -8,6 +8,7 @@ const websiteBaseURL = "http://localhost:3000";
 
 const clientBaseURL = axios.create({
   baseURL: websiteBaseURL,
+  withCredentials: true,
 });
 
 const authBasePath = "/api/auth";
