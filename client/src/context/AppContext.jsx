@@ -1,57 +1,63 @@
 import { createContext, useState, useEffect } from "react";
 import { clientBaseURL, clientEndPoints } from "../config";
-import { toast } from "react-toastify";
 
 const AppContext = createContext();
 
-export const AppContextProvider = (props) => {
+export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     try {
-      const { data } = await clientBaseURL.get(clientEndPoints.userData);
-      data.success ? setUserData(data.userData) : toast.error(data.message);
+      const res = await clientBaseURL.get(clientEndPoints.userData);
+
+      if (res.status === 200 && res.data.success) {
+        setUserData(res.data.userData);
+      }
     } catch (error) {
-      toast.error(error.message);
+      // silent fail (user probably logged out)
+      console.error("Failed to fetch user data:", error);
+      setUserData(null);
     }
   };
 
   const getAuthState = async () => {
     try {
-      const response = await clientBaseURL.post(
-        clientEndPoints.isAuthenticated
-      );
+      const res = await clientBaseURL.post(clientEndPoints.isAuthenticated);
 
-      if (response.data.success) {
+      if (res.status === 200 && res.data.success) {
         setIsLoggedIn(true);
-        getUserData();
-      } else {
-        setIsLoggedIn(false);
-        setUserData(null);
+        await getUserData();
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.response?.status === 401) {
+        // Unauthorized → expected case
+        setIsLoggedIn(false);
+        setUserData(null);
+      } else {
+        console.error("Auth check failed:", error);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  // ✅ Call getAuthState once when the provider mounts
   useEffect(() => {
     getAuthState();
   }, []);
 
   const value = {
     isLoggedIn,
-    setIsLoggedIn,
     userData,
+    loading,
+    setIsLoggedIn,
     setUserData,
-    getUserData,
     getAuthState,
+    getUserData,
   };
 
-  return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 export default AppContext;
