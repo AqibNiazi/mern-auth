@@ -97,7 +97,7 @@ mern-auth/
 │   │   └── utils/         # OTP & email utilities
 │   ├── vercel.json
 │   └── package.json
-```
+
 
 ---
 
@@ -127,7 +127,7 @@ mern-auth/
 ### 🏠 Dashboard / Protected Route
 
 ![Dashboard](client/src/assets/screenshots/dashboard.png)
-```
+
 
 ---
 
