@@ -103,11 +103,6 @@ mern-auth/
 
 ## 🖼️ Screenshots
 
-> Add screenshots by uploading images to the `screenshots/` folder and linking them below.
-
-```md
-## 🖼️ Screenshots
-
 ### 🔐 Login Page
 
 ![Login Page](client/src/assets/screenshots/login.png)
@@ -124,12 +119,10 @@ mern-auth/
 ![New Password](client/src/assets/screenshots/newPassword.png)
 
 
-### 🏠 Dashboard / Protected Route
+### 🏠 Dashboard
 
 ![Dashboard](client/src/assets/screenshots/dashboard.png)
-```
 
----
 
 ## ⚙️ Environment Variables
 
