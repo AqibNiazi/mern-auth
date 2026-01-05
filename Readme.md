@@ -110,23 +110,23 @@ mern-auth/
 
 ### 🔐 Login Page
 
-![Login Page](screenshots/login.png)
+![Login Page](client/src/assets/screenshots/login.png)
 
 ### 📝 Register Page
 
-![Register Page](screenshots/register.png)
+![Register Page](client/src/assets/screenshots/register.png)
 
-### 📧 Email OTP Verification Flow
+### 📧 Reset Password Flow
 
-![OTP Verification Email](screenshots/resetPassword.png)
-![OTP Verification Email](screenshots/otp.png)
-![OTP Verification Email](screenshots/resetPasswordOtp.png)
+![Reset Password Email](client/src/assets/screenshots/resetPassword.png)
+![OTP Verification Email](client/src/assets/screenshots/otp.png)
+![Reset Password OTP](client/src/assets/screenshots/resetPasswordOtp.png)
+![New Password](client/src/assets/screenshots/newPassword.png)
 
-### 📧 Reset Password OTP Verification
 
 ### 🏠 Dashboard / Protected Route
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](client/src/assets/screenshots/dashboard.png)
 ```
 
 ---
@@ -200,15 +200,6 @@ http://localhost:5173
 | POST   | `/api/auth/verify-otp` | Verify account via OTP |
 | GET    | `/api/user/profile`    | Protected user route   |
 
----
-
-## 📌 Future Improvements
-
-- 🔁 Forgot / Reset Password functionality
-- ⏳ OTP expiration & resend limits
-- 🔐 Role-based access control (RBAC)
-- 🧪 Unit & integration testing
-- 📱 Improved UI & mobile responsiveness
 
 ---
 
@@ -219,10 +210,3 @@ Aspiring Full-Stack & AI/ML Engineer
 
 - GitHub: [AqibNiazi](https://github.com/AqibNiazi)
 
----
-
-## ⭐ Acknowledgements
-
-- MongoDB & Mongoose Documentation
-- Express.js Community
-- Nodemailer Documentation
