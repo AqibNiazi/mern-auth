@@ -7,9 +7,12 @@ const HOST = process.env.HOST;
 const app = express();
 const PORT = process.env.PORT || 3000;
 const authRouter = require("./src/Router/authRouter");
-const userRouter = require("./src/Router/userRoutes");
+const userRouter = require("./src/Router/userRouter");
 const cookieParser = require("cookie-parser");
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://mern-auth-plum.vercel.app/",
+];
 // Middlewares
 app.use(
   cors({
