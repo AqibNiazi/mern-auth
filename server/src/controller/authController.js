@@ -198,7 +198,7 @@ const sendResetOtp = async (req, res) => {
       from: process.env.SMTP_USER,
       to: email,
       subject: "Reset Password OTP",
-      text: `Your OTP for resetting your password is ${otp}. Use this OTP to reset your password.`,
+      // text: `Your OTP for resetting your password is ${otp}. Use this OTP to reset your password.`,
       html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
         "{{email}}",
         user.email
