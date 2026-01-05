@@ -97,15 +97,10 @@ mern-auth/
 │   │   └── utils/         # OTP & email utilities
 │   ├── vercel.json
 │   └── package.json
-
+```
 
 ---
 
-## 🖼️ Screenshots
-
-> Add screenshots by uploading images to the `screenshots/` folder and linking them below.
-
-```md
 ## 🖼️ Screenshots
 
 ### 🔐 Login Page
@@ -128,7 +123,7 @@ mern-auth/
 
 ![Dashboard](client/src/assets/screenshots/dashboard.png)
 
-
+```
 ---
 
 ## ⚙️ Environment Variables
