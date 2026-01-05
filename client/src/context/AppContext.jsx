@@ -11,7 +11,6 @@ export const AppContextProvider = (props) => {
   const getUserData = async () => {
     try {
       const { data } = await clientBaseURL.get(clientEndPoints.userData);
-      console.log(data);
       data.success ? setUserData(data.userData) : toast.error(data.message);
     } catch (error) {
       toast.error(error.message);
@@ -23,7 +22,6 @@ export const AppContextProvider = (props) => {
       const response = await clientBaseURL.post(
         clientEndPoints.isAuthenticated
       );
-      console.log("response", response);
 
       if (response.data.success) {
         setIsLoggedIn(true);

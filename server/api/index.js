@@ -10,8 +10,8 @@ const database = require("../src/config/mongodb");
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://mern-auth-plum.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
