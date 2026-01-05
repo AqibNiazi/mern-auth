@@ -80,7 +80,7 @@ const Login = () => {
                 value={user.name}
                 onChange={handleChange}
                 placeholder="Enter your name"
-                className="bg-transparent outline-none"
+                className="bg-transparent outline-none text-white"
                 required
               />
             </div>
@@ -94,7 +94,7 @@ const Login = () => {
               value={user.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="bg-transparent outline-none"
+              className="bg-transparent outline-none text-white"
               required
             />
           </div>
@@ -107,7 +107,7 @@ const Login = () => {
               value={user.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="bg-transparent outline-none"
+              className="bg-transparent outline-none text-white"
               required
             />
           </div>
