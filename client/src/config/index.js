@@ -1,10 +1,10 @@
 import axios from "axios";
 //  Local
 // axios.defaults.withCredentials = true;
-const websiteBaseURL = "http://localhost:3000";
+// const websiteBaseURL = "http://localhost:3000";
 
 // Production
-// const websiteBaseURL = "https://crud-app-backend-delta.vercel.app";
+const websiteBaseURL = "https://mern-auth-5aqq.vercel.app/";
 
 const clientBaseURL = axios.create({
   baseURL: websiteBaseURL,
