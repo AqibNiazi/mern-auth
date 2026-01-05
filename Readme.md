@@ -3,10 +3,6 @@
 A **full-stack MERN authentication application** implementing secure user registration, login, and **email-based OTP verification**.
 This project demonstrates real-world authentication workflows commonly used in modern web applications.
 
-🔗 **Repository:** [https://github.com/AqibNiazi/mern-auth](https://github.com/AqibNiazi/mern-auth)
-
----
-
 ## 🚀 Features
 
 - 👤 **User Registration**
