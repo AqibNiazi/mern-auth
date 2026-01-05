@@ -119,12 +119,10 @@ mern-auth/
 ![New Password](client/src/assets/screenshots/newPassword.png)
 
 
-### 🏠 Dashboard / Protected Route
+### 🏠 Dashboard
 
 ![Dashboard](client/src/assets/screenshots/dashboard.png)
 
-```
----
 
 ## ⚙️ Environment Variables
 
