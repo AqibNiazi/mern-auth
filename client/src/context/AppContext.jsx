@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { clientBaseURL, clientEndPoints } from "../config";
+import { clientBaseURL, clientEndPoints } from "@/config";
 
 const AppContext = createContext();
 

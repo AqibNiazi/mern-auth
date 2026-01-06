@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
-import { assets } from "../assets/assets";
+import { assets } from "@/assets/assets";
 import { useNavigate } from "react-router-dom";
-import AppContext from "../context/AppContext";
+import AppContext from "@/context/AppContext";
 import { toast } from "react-toastify";
-import { clientBaseURL, clientEndPoints } from "../config";
+import { clientBaseURL, clientEndPoints } from "@/config";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Container from "@/components/Container";
 const Login = () => {
   const navigate = useNavigate();
   const { setIsLoggedIn, getUserData } = useContext(AppContext);
@@ -54,13 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.logo}
-        alt="App Logo"
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
-      />
+    <Container className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
         <h2 className="text-3xl font-semibold text-white text-center mb-3">
           {state === "Sign up" ? "Create Account" : "Login"}
@@ -74,28 +71,24 @@ const Login = () => {
           {state === "Sign up" && (
             <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
               <img src={assets.person_icon} alt="Person icon" />
-              <input
+              <Input
                 type="text"
                 name="name"
                 value={user.name}
                 onChange={handleChange}
                 placeholder="Enter your name"
-                className="bg-transparent outline-none text-white"
-                required
               />
             </div>
           )}
 
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
             <img src={assets.mail_icon} alt="Mail Icon" />
-            <input
+            <Input
               type="email"
               name="email"
               value={user.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="bg-transparent outline-none text-white"
-              required
             />
           </div>
 
@@ -118,9 +111,7 @@ const Login = () => {
           >
             Forgot Password?
           </p>
-          <button className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium cursor-pointer">
-            {state}
-          </button>
+          <Button type="submit">{state}</Button>
         </form>
         {state === "Sign up" ? (
           <p className="text-gray-400 text-center text-xs mt-4">
@@ -144,7 +135,7 @@ const Login = () => {
           </p>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

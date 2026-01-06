@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
-import AppContext from "../context/AppContext";
+import { assets } from "@/assets/assets";
+import AppContext from "@/context/AppContext";
 import { toast } from "react-toastify";
-import { clientBaseURL, clientEndPoints } from "../config";
+import { clientBaseURL, clientEndPoints } from "@/config";
 const Navbar = () => {
   const navigate = useNavigate();
   const { userData, setUserData, setIsLoggedIn } = useContext(AppContext);

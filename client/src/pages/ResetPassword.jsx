@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
-import { clientBaseURL, clientEndPoints } from "../config";
+import { assets } from "@/assets/assets";
+import { clientBaseURL, clientEndPoints } from "@/config";
 import { toast } from "react-toastify";
 
 const ResetPassword = () => {

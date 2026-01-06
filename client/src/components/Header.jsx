@@ -1,9 +1,18 @@
 import React, { useContext } from "react";
-import { assets } from "../assets/assets";
-import AppContext from "../context/AppContext";
+import { assets } from "@/assets/assets";
+import AppContext from "@/context/AppContext";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { userData } = useContext(AppContext);
-  console.log("user Data", userData);
+
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    if (!userData) {
+      navigate("/login");
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center mt-20 px-4 text-center text-gray-800">
@@ -27,7 +36,10 @@ const Header = () => {
         Let's start with a quick product tour and we will have you up and
         running in no time.
       </p>
-      <button className="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all">
+      <button
+        onClick={handleNavigate}
+        className="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all cursor-pointer"
+      >
         Get Started
       </button>
     </div>

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
-import AppContext from "../context/AppContext";
-import { clientBaseURL, clientEndPoints } from "../config";
+import { assets } from "@/assets/assets";
+import AppContext from "@/context/AppContext";
+import { clientBaseURL, clientEndPoints } from "@/config";
 import { toast } from "react-toastify";
 
 const EmailVerify = () => {

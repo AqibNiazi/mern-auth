@@ -1,10 +1,10 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AppLayout from "../layout/AppLayout";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import EmailVerify from "../pages/EmailVerify";
-import ResetPassword from "../pages/ResetPassword";
+import AppLayout from "@/layout/AppLayout";
+import Home from "@/pages/Home";
+import Login from "@/pages/Login";
+import EmailVerify from "@/pages/EmailVerify";
+import ResetPassword from "@/pages/ResetPassword";
 
 const AppRoutes = () => {
   const router = createBrowserRouter([
