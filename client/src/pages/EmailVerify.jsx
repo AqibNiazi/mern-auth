@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { assets } from "@/assets/assets";
 import AppContext from "@/context/AppContext";
 import { clientBaseURL, clientEndPoints } from "@/config";
 import { toast } from "react-toastify";
-
+import Container from "@/components/Container";
+import Form from "@/components/Form";
 const EmailVerify = () => {
   const navigate = useNavigate();
   const inputRefs = React.useRef([]);
@@ -36,16 +36,17 @@ const EmailVerify = () => {
       e.preventDefault();
       const otpArray = inputRefs.current.map((e) => e.value);
       const otp = otpArray.join("");
-      const response = await clientBaseURL.post(clientEndPoints.verifyAccount, {
+      const res = await clientBaseURL.post(clientEndPoints.verifyAccount, {
         otp,
       });
+      console.log("res", res);
 
-      if (response.data.success) {
-        toast.success(response.data.message);
+      if (res.data.success) {
+        toast.success(res.data.message);
         getUserData();
         navigate("/");
       } else {
-        toast.error(response.data.message);
+        toast.error(res.data.message);
       }
     } catch (error) {
       toast.error(error.message);
@@ -57,23 +58,13 @@ const EmailVerify = () => {
   }, [isLoggedIn, userData]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen  bg-gradient-to-br from-blue-200 to-purple-400">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.logo}
-        alt="App Logo"
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
-      />
-      <form
+    <Container>
+      <Form
         onSubmit={onSubmitHandler}
-        className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+        headingtxt="Email Verify OTP"
+        paragraphtxt="Enter the 6-digit code sent to your email address."
+        btntxt="Verify Email"
       >
-        <h1 className="text-white text-2xl font-semibold text-center mb-4">
-          Email Verify OTP
-        </h1>
-        <p className="text-center mb-6 text-indigo-300">
-          Enter the 6-digit code sent to your email address.
-        </p>
         <div className="flex justify-between mb-8" onPaste={handlePaste}>
           {Array(6)
             .fill(0)
@@ -90,11 +81,8 @@ const EmailVerify = () => {
               />
             ))}
         </div>
-        <button className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full">
-          Verify email
-        </button>
-      </form>
-    </div>
+      </Form>
+    </Container>
   );
 };
 

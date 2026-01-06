@@ -1,10 +1,12 @@
 import React from "react";
 import { assets } from "@/assets/assets";
 import { useNavigate } from "react-router-dom";
-const Container = ({ children }) => {
+const Container = ({ children, className }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
+    <div
+      className={`flex justify-center items-center min-h-screen  ${className} bg-gradient-to-br from-blue-200 to-purple-400`}
+    >
       <img
         onClick={() => navigate("/")}
         src={assets.logo}

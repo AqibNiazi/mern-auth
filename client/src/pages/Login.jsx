@@ -57,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <Container className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
+    <Container className="px-6 sm:px-0">
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
         <h2 className="text-3xl font-semibold text-white text-center mb-3">
           {state === "Sign up" ? "Create Account" : "Login"}
@@ -94,14 +94,12 @@ const Login = () => {
 
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
             <img src={assets.lock_icon} alt="Lock Icon" />
-            <input
+            <Input
               type="password"
               name="password"
               value={user.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="bg-transparent outline-none text-white"
-              required
             />
           </div>
 

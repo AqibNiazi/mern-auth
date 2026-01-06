@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { assets } from "@/assets/assets";
 import { clientBaseURL, clientEndPoints } from "@/config";
 import { toast } from "react-toastify";
+import Container from "@/components/Container";
+import Form from "@/components/Form";
+import Input from "@/components/Input";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -12,8 +15,6 @@ const ResetPassword = () => {
   const [isEmailSent, setIsEmailSent] = useState("");
   const [otp, setOtp] = useState(0);
   const [isOtpSubmitted, setIsOtpSubmitted] = useState(false);
-
-  // const { isLoggedIn, userData, getUserData } = useContext(AppContext);
 
   const handleInput = (e, index) => {
     if (e.target.value.length > 0 && index < inputRefs.current.length - 1) {
@@ -83,58 +84,36 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-400">
-      <img
-        onClick={() => navigate("/")}
-        src={assets.logo}
-        alt="App Logo"
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
-      />
+    <Container>
       {/* Email Input Form */}
 
       {!isEmailSent && (
-        <form
+        <Form
           onSubmit={onSubmitEmail}
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+          headingtxt="Reset Password"
+          paragraphtxt="Enter your registered email address."
+          btntxt="Verify email"
         >
-          <h1 className="text-white text-2xl font-semibold text-center mb-4">
-            Reset Password
-          </h1>
-          <p className="text-center mb-6 text-indigo-300">
-            Enter your registered email address.
-          </p>
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
             <img src={assets.mail_icon} alt="Mail Icon" className="w-3 h-3" />
-            <input
+            <Input
               type="email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="bg-transparent outline-none text-white"
-              required
             />
           </div>
-          <button
-            className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full cursor-pointer"
-            type="submit"
-          >
-            Verify email
-          </button>
-        </form>
+        </Form>
       )}
       {/*OTP Input Form */}
       {!isOtpSubmitted && isEmailSent && (
-        <form
+        <Form
           onSubmit={onSubmitOTP}
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+          headingtxt="Reset Password OTP"
+          paragraphtxt="Enter the 6-digit code sent to your email address."
+          btntxt="Verify OTP"
         >
-          <h1 className="text-white text-2xl font-semibold text-center mb-4">
-            Reset Password OTP
-          </h1>
-          <p className="text-center mb-6 text-indigo-300">
-            Enter the 6-digit code sent to your email address.
-          </p>
           <div className="flex justify-between mb-8" onPaste={handlePaste}>
             {Array(6)
               .fill(0)
@@ -151,49 +130,31 @@ const ResetPassword = () => {
                 />
               ))}
           </div>
-          <button
-            className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full cursor-pointer"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
+        </Form>
       )}
       {/*OTP RESET FORM END*/}
 
       {/*Enter New Password */}
       {isOtpSubmitted && isEmailSent && (
-        <form
-          className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm"
+        <Form
           onSubmit={onSubmitNewPassword}
+          headingtxt="New Password"
+          paragraphtxt="Enter the new password"
+          btntxt="Submit"
         >
-          <h1 className="text-white text-2xl font-semibold text-center mb-4">
-            New Password
-          </h1>
-          <p className="text-center mb-6 text-indigo-300">
-            Enter the new password
-          </p>
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
             <img src={assets.lock_icon} alt="Lock Icon" />
-            <input
+            <Input
               type="password"
               name="newPassword"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Enter new password"
-              className="bg-transparent outline-none text-white"
-              required
             />
           </div>
-          <button
-            className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full cursor-pointer"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
+        </Form>
       )}
-    </div>
+    </Container>
   );
 };
 
